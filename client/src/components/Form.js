@@ -3,6 +3,7 @@ import API from '../services/ApiServices';
 import { ApiEndPoint } from '../services/ApiEndPoint';
 import formSchema from '../validation/formSchmea';
 import { Formik } from 'formik';
+import { toast } from "react-hot-toast";
 
 function Form() {
   const [fName, setFname] = useState("")
@@ -79,11 +80,10 @@ function Form() {
     API.post(ApiEndPoint.Post, formData, { headers: headers })
       .then((response) => {
         console.log("response", response.data);
-
-        alert("posted")
+        toast.success("submitted sucessfully !");
       }).catch((error) => {
-        console.log("error", error)
-  
+        console.log("error", error.response.data.message)
+        toast.error(error.response.data.message);
       })
 
 
@@ -145,8 +145,8 @@ function Form() {
         <div className='form-chkbox'>
 
 
-          <input type='checkbox' onChange={() => { setResidenceAddPermanent(!residenceAddPermanent) }} />
-          <label className='form-ro'>Same as Residental Address</label>
+          <input type='checkbox' onChange={() => { setResidenceAddPermanent(!residenceAddPermanent) }}  />
+          <label >Same as Residental Address</label>
 
         </div>
 
@@ -155,12 +155,12 @@ function Form() {
           <div className='form-row'>
             <div class="user-box">
               <label>Street 1</label>
-              <input type="text" name="" value={residenceAddPermanent ? rstreet1 : pstreet1} onChange={(e) => { setpstreet1(e.target.value) }} />
+              <input type="text" name="" value={residenceAddPermanent ? rstreet1 : pstreet1} onChange={(e) => { setpstreet1(e.target.value) }}  required/>
             </div>
 
             <div class="user-box">
               <label>Street 2</label>
-              <input type="text" name="" value={residenceAddPermanent ? rstreet2 : pstreet2} onChange={(e) => { setpstreet2(e.target.value) }} />
+              <input type="text" name="" value={residenceAddPermanent ? rstreet2 : pstreet2} onChange={(e) => { setpstreet2(e.target.value) }} required/>
             </div>
 
           </div>

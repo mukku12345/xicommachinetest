@@ -23,6 +23,10 @@ db.mongoose
 
 require ('./routes/form.routes') (app);
 
+app.get("/",(req,res)=>{
+  res.send('Hii welcome to my website hmmm !')
+})
+
 app.listen (port, () => {
   console.log ('server is running on port:',port);
 });
